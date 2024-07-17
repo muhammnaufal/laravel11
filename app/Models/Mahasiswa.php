@@ -18,4 +18,13 @@ class Mahasiswa extends Model
         'alamat_mhs',
         'id_kelas',
     ];
+    protected $primaryKey = 'nim';
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function kelas(){
+        return $this->belongsTo(Kelas::class, 'id_kelas');
+    }
 }

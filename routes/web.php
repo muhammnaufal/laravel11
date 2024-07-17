@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/pengguna',\App\Http\Controllers\UserController::class);
-Route::resource('/kelas',\App\Http\Controllers\KelasController::class);
-Route::resource('/matakuliah',\App\Http\Controllers\MatakuliahController::class);
+Route::resource('/pengguna', \App\Http\Controllers\UserController::class);
+Route::resource('/kelas', \App\Http\Controllers\KelasController::class);
+Route::resource('/matakuliah', \App\Http\Controllers\MatakuliahController::class);
+Route::resource('/mahasiswa', \App\Http\Controllers\MahasiswaController::class);
