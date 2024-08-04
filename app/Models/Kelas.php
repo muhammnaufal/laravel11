@@ -13,4 +13,15 @@ class Kelas extends Model
     protected $fillable = [
         'nama_kelas',
     ];
+
+
+    public function dataTambahanMahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class, 'id_kelas');
+    }
+
+    public function dataTambahanJadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'id_jadwal');
+    }
 }

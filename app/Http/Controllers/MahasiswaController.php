@@ -15,7 +15,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $mahasiswa = Mahasiswa::latest()->paginate(10);
-        return view('mahasiswa.index',compact('mahasiswa'));
+        return view('levelAdmin.mahasiswa.index', compact('mahasiswa'));
     }
 
     /**
@@ -23,9 +23,9 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        $user = User::where('level','mahasiswa')->get();
+        $user = User::where('level', 'mahasiswa')->get();
         $kelas = Kelas::all();
-        return view('mahasiswa.create', compact('user','kelas'));
+        return view('levelAdmin.mahasiswa.create', compact('user', 'kelas'));
     }
 
     /**
@@ -36,7 +36,7 @@ class MahasiswaController extends Controller
         //validate form
         //dd($request->all());
         $request->validate([
-            'nim'               => 'required|min:9|unique:mahasiswa,nim',
+            'nim'               => 'required|min:9|unique:dosen,nidn',
             'nama_mahasiswa'    => 'required|min:5',
             'jenis_kelamin'     => 'required',
             'alamat_mhs'        => 'required'
@@ -53,7 +53,7 @@ class MahasiswaController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->route('mahasiswa.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('admin.mahasiswa.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -70,10 +70,10 @@ class MahasiswaController extends Controller
     public function edit(string $nim)
     {
         $mahasiswa = Mahasiswa::findOrFail($nim);
-        $user = User::where('level','mahasiswa')->get();
+        $user = User::where('level', 'mahasiswa')->get();
         $kelas = Kelas::all();
 
-        return view('mahasiswa.edit', compact('mahasiswa','user','kelas'));
+        return view('levelAdmin.mahasiswa.edit', compact('mahasiswa', 'user', 'kelas'));
     }
 
     /**
@@ -100,7 +100,7 @@ class MahasiswaController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->route('mahasiswa.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('admin.mahasiswa.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -109,7 +109,7 @@ class MahasiswaController extends Controller
     public function destroy(string $nim)
     {
         $mahasiswa = Mahasiswa::findOrFail($nim);
-         $mahasiswa->delete();
-        return redirect()->route('mahasiswa.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        $mahasiswa->delete();
+        return redirect()->route('admin.mahasiswa.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

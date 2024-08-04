@@ -13,4 +13,9 @@ class Matakuliah extends Model
     protected $fillable = [
         'nama_matakuliah',
     ];
+
+    public function dataTambahanJadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'id_jadwal');
+    }
 }
